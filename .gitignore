@@ -244,6 +244,4 @@ ModelManifest.xml
 # FAKE - F# Make
 .fake/
 
-Web.config
-Web.Debug.config
-Web.Release.config
+FixedAsset_ConnectionStrings.config
