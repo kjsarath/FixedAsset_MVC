@@ -1,4 +1,17 @@
 ﻿var faApp = angular.module('faApp', ['ngRoute']);
+
+faApp.config(function ($routeProvider) {
+    $routeProvider
+        .when('/', {
+            templateUrl: 'pages/Login.html',
+            controller:'LoginController'
+        })
+        .when('/Next', {
+            templateUrl: 'pages/Next.html',
+            controller:'LoginController'
+        })
+});
+
 faApp.controller('LoginController',['$scope','$log','$http', function ($scope, $log, $http) {
     $scope.userModel = {};
     $scope.message = '';
@@ -22,7 +35,7 @@ faApp.controller('LoginController',['$scope','$log','$http', function ($scope, $
                     $log.info($scope.message);
                 }
                 
-            }, function myError(data, status, header, config) {
+            }, function error(data, status, header, config) {
                 $scope.message = 'Error in fetching data..!';
                 $log.alert($scope.message);
                 $log.error(data.statusText);
