@@ -7,5 +7,6 @@ namespace FixedAsset_MVC.Models
 {
     public class Test
     {
+        public int _test = 0;
     }
 }
