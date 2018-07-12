@@ -119,8 +119,10 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Index.html" />
+    <Content Include="Home.html" />
     <Content Include="Pages\Login.html" />
     <Content Include="Pages\Next.html" />
+    <Content Include="ScriptsNg\Controllers\HomeController.js" />
     <Content Include="ScriptsNg\Controllers\LoginController.js" />
     <Content Include="Scripts\angular-mocks.js" />
     <Content Include="Scripts\angular-route.js" />
