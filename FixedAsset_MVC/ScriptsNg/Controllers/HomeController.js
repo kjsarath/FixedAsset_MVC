@@ -9,6 +9,8 @@
         })
 
         .otherwise({ redirectTo: '/Next' });
+
+    //$locationProvider.html5Mode(true);
 }])
 
 .run(['$rootScope', '$location', '$cookieStore', '$http',

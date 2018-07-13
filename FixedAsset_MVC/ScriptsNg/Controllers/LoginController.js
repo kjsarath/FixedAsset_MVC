@@ -1,7 +1,5 @@
-﻿
-angular.module('Authentication', []);
-angular.module('Home', ['ngRoute', 'ngCookies']);
-angular.module('faAppLogIn', ['Authentication','Home','ngRoute','ngCookies'])
+﻿angular.module('Home', ['ngRoute', 'ngCookies']);
+angular.module('faAppLogIn', ['Home','ngRoute','ngCookies'])
 .config(['$routeProvider', function ($routeProvider) {
 
     $routeProvider
@@ -12,6 +10,8 @@ angular.module('faAppLogIn', ['Authentication','Home','ngRoute','ngCookies'])
         })
         
         .otherwise({ redirectTo: '/login' });
+
+    //$locationProvider.html5Mode(true);
 }])
 
 .run(['$rootScope', '$location', '$cookieStore', '$http',
