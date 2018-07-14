@@ -120,6 +120,7 @@
     <Content Include="Global.asax" />
     <Content Include="Index.html" />
     <Content Include="Home.html" />
+    <Content Include="Pages\Company.html" />
     <Content Include="Pages\Login.html" />
     <Content Include="Pages\Next.html" />
     <Content Include="ScriptsNg\Controllers\HomeController.js" />
@@ -152,11 +153,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\CompanyController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
+    <Compile Include="DAL\CompanyService.cs" />
     <Compile Include="DAL\UserService.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\Company.cs" />
     <Compile Include="Models\Test.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -186,6 +190,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Company\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

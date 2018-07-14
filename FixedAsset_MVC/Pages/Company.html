@@ -1,0 +1,10 @@
+﻿<h1>Company</h1>
+<br />
+<a href="#!/Company" ng-click="getAll()"><i class="fa fa-home"></i>Refresh</a>
+<br />
+<table class="table table-striped">
+    <tr ng-repeat="companyModel in allCompanies">
+        <td>{{companyModel.code}}</td>
+        <td>{{companyModel.name}}</td>
+    </tr>
+</table>
