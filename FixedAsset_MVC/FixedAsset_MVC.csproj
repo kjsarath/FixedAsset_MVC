@@ -123,6 +123,7 @@
     <Content Include="Pages\Company.html" />
     <Content Include="Pages\Login.html" />
     <Content Include="Pages\Next.html" />
+    <Content Include="ScriptsNg\Controllers\CompanyController.js" />
     <Content Include="ScriptsNg\Controllers\HomeController.js" />
     <Content Include="ScriptsNg\Controllers\LoginController.js" />
     <Content Include="Scripts\angular-mocks.js" />

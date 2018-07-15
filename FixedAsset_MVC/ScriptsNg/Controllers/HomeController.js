@@ -1,5 +1,5 @@
-﻿angular.module('Home', ['ngRoute','ngCookies'])
-.config(['$routeProvider','$locationProvider', function ($routeProvider, $locationProvider) {
+﻿var homeApp=angular.module('Home', ['ngRoute','ngCookies'])
+homeApp.config(['$routeProvider', '$locationProvider', function ($routeProvider, $locationProvider) {
 
     $routeProvider
         .when('/Next', {
@@ -8,16 +8,16 @@
             hideMenus: true
         })
         .when('/Company', {
-            controller: 'HomeController',
+            controller: 'CompanyController',
             templateUrl: 'pages/Company.html'
-        });
+        })
 
-        //.otherwise({ redirectTo: '/Next' });
+        .otherwise({ redirectTo: '/Next' });
 
 //    $locationProvider.html5Mode(true);
 }])
 
-.run(['$rootScope', '$location', '$cookieStore', '$http',
+homeApp.run(['$rootScope', '$location', '$cookieStore', '$http',
     function ($rootScope, $location, $cookieStore, $http) {
         //debugger;
         $rootScope.globals = $cookieStore.get('globals') || {};
@@ -33,7 +33,7 @@
     }]
 )
 
-.controller('HomeController', ['$scope', '$log', '$http', '$location', '$window',
+homeApp.controller('HomeController', ['$scope', '$log', '$http', '$location', '$window',
     function ($scope, $log, $http, $location, $window) {
         $scope.logInStatus = 'Logout';
         $scope.message = 'Logged In :)';
@@ -44,33 +44,5 @@
         
         };
 
-//    }]
-//)
-//.controller('CompanyController', ['$scope', '$http', '$log', '$location',
-//    function ($scope, $http, $log, $location) {
-//        $scope.messgae = '';
-        $scope.allCompanies = {};
-        $scope.companyModel = {};
-
-        $scope.getAll = function () {
-            $http.get("Company/GetAllCompanies")
-                .then(function (data, status, header, config) {
-                    $log.info(data);
-                    if (data == null || data.data[0]=='') {
-                        $scope.message = 'Invalid data!';
-                        $log.warn($scope.message);
-                        $scope.allCompanies = {};
-                    }
-                    else {
-                        $scope.message = 'Valid data :)';
-                        $log.info($scope.message);
-                        $log.info(data.data);
-                        $scope.allCompanies = data.data;
-                        $location.path('/Company');
-                    }
-                }, function (error) {
-                    $scope.message = 'Error in fetching data!';
-                    $log.error($scope.message);
-                })
-        }
-}])
+    }]
+)
