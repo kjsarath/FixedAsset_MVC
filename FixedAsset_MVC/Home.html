@@ -13,13 +13,13 @@
     <script src="../ScriptsNg/Controllers/LoginController.js"></script>
     <script src="../ScriptsNg/Controllers/HomeController.js"></script>
     <script src="../ScriptsNg/Controllers/CompanyController.js"></script>
-
+    <script src="../ScriptsNg/Controllers/AssetController.js"></script>
     
 </head>
 <body ng-app="Home">
-    <div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="navbar navbar-default navbar-fixed-top">
         <div class="container">
-            <div class="navbar-header">
+            <div class="navbar-header" style="font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
@@ -28,8 +28,14 @@
                 <span class="navbar-brand">Fixed Asset Management System</span>
             </div>
             <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
+                <ul class="nav navbar-nav" style="font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;">
                     <li><a href="#!/Company" ng-click="getAll()"><i class="fa fa-home"></i>Company</a></li>
+                    <li class="menu-item dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Masters<b class="caret"></b></a>
+                        <ul class="dropdown-menu " style="font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;">
+                            <li class="menu-item dropdown dropdown-submenu"><a href="#!/Asset" ng-click="getAll()"><i class="fa fa-home"></i>Asset</a></li>
+                        </ul>
+                    </li>
                     <li><a href="#" ng-click="logOut()" ><i class="fa fa-home"></i>Logout</a></li>
                     <li><a href="#!/Next">Next</a></li>
                 </ul>

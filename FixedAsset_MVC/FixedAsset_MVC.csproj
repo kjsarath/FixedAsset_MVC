@@ -120,9 +120,11 @@
     <Content Include="Global.asax" />
     <Content Include="Index.html" />
     <Content Include="Home.html" />
+    <Content Include="Pages\Asset.html" />
     <Content Include="Pages\Company.html" />
     <Content Include="Pages\Login.html" />
     <Content Include="Pages\Next.html" />
+    <Content Include="ScriptsNg\Controllers\AssetController.js" />
     <Content Include="ScriptsNg\Controllers\CompanyController.js" />
     <Content Include="ScriptsNg\Controllers\HomeController.js" />
     <Content Include="ScriptsNg\Controllers\LoginController.js" />
@@ -154,13 +156,16 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\AssetController.cs" />
     <Compile Include="Controllers\CompanyController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
+    <Compile Include="DAL\AssetService.cs" />
     <Compile Include="DAL\CompanyService.cs" />
     <Compile Include="DAL\UserService.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\Asset.cs" />
     <Compile Include="Models\Company.cs" />
     <Compile Include="Models\Test.cs" />
     <Compile Include="Models\User.cs" />
@@ -191,6 +196,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Asset\" />
     <Folder Include="Views\Company\" />
   </ItemGroup>
   <PropertyGroup>

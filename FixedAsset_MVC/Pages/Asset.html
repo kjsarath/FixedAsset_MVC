@@ -1,0 +1,35 @@
+﻿<h1>Assets</h1>
+<div ng-hide="showDetails">
+    <table class="table table-striped">
+        <tr>
+            <th scope="col">ASSET #</th>
+            <th scope="col">NAME/DESCRIPTION</th>
+            <th scope="col">GROUP</th>
+            <th scope="col">CATEGORY</th>
+            <th scope="col">DEPR. TYPE</th>
+        </tr>
+        <tr ng-repeat="assetModel in allAssets">
+            <td>{{assetModel.asset_no}}</td>
+            <td>{{assetModel.description}}</td>
+            <td>{{assetModel.group}}</td>
+            <td>{{assetModel.category}}</td>
+            <td>{{assetModel.depreciation_type}}</td>
+            <td>
+                <button type="submit" id="btDetails" ng-click="get"
+            </td>
+        </tr>
+    </table>
+</div>
+<div ng-show="showDetails">
+    <h4>ASSET #: {{assetModel.asset_no}}</h4>
+    <h4>NAME/DESCRIPTION: {{assetModel.description}}</h4>
+    <h4>GROUP: {{assetModel.group}}</h4>
+    <h4>CATEGORY: {{assetModel.category}}</h4>
+    <h4>SUB CATEGORY: {{assetModel.sub_category}}</h4>
+    <h4>ASSET LIFE: {{assetModel.asset_life}}</h4>
+    <h4>DEPRICIATION TYPE: {{assetModel.depreciation_type}}</h4>
+    <h4>DEPRECIATION %:{{assetModel.depreciation_percent}}</h4>
+    <h4>SALVAGE VALUE: {{assetModel.salvage_value}}</h4>
+    <br />
+    <button type="submit" id="btBack" ng-click="showGrid()">Back</button>
+</div>
