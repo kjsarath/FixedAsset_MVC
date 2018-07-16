@@ -11,6 +11,10 @@ homeApp.config(['$routeProvider', '$locationProvider', function ($routeProvider,
             controller: 'CompanyController',
             templateUrl: 'pages/Company.html'
         })
+        .when('/CompanyEdit', {
+            controller: 'CompanyController',
+            templateUrl:'pages/CompanyEdit.html'
+        })
 
         .otherwise({ redirectTo: '/Next' });
 

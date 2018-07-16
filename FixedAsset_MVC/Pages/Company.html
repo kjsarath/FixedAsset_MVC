@@ -1,14 +1,26 @@
 ﻿<h1>Company</h1>
 <br />
-<a href="#!/Company" ng-click="getAll()"><i class="fa fa-home"></i>Refresh</a>
-<br />
-<table class="table table-striped">
-    <tr>
-        <th scope="col">CODE</th>
-        <th scope="col">NAME</th>
-    </tr>
-    <tr ng-repeat="companyModel in allCompanies" >
-        <td>{{companyModel.code}}</td>
-        <td>{{companyModel.name}}</td>
-    </tr>
-</table>
+<!--<a href="#!/Company" onclick="getAll();"><i class="fa fa-home"></i>Refresh</a>
+<br />-->
+<div ng-hide="showDetail">
+    <table class="table table-striped">
+        <tr>
+            <th scope="col">CODE</th>
+            <th scope="col">NAME</th>
+        </tr>
+        <tr ng-repeat="companyModel in allCompanies" >
+            <td>{{companyModel.code}}</td>
+            <td>{{companyModel.name}}</td>
+            <td>
+                <!--<a href="#!/Company" ng-click="getCompany(companyModel)" >Details</a>-->
+                <button type="submit" id="btEdit" ng-click="getCompany(companyModel)">Details</button>
+            </td>
+        </tr>
+    </table>
+</div>
+<div ng-show="showDetail">
+    <h5>{{companyModel.code}}</h5>
+    <br />
+    <h5>{{companyModel.name}}</h5>
+    <button type="submit" id="btBack" ng-click="showGrid()">Back</button>
+</div>
