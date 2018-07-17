@@ -38,6 +38,22 @@
         <h4>DEPRICIATION TYPE: {{assetModel.depreciation_type}}</h4>
         <h4>DEPRECIATION %:{{assetModel.depreciation_percent}}</h4>
         <h4>SALVAGE VALUE: {{assetModel.salvage_value}}</h4>
+        <br />
+        <h4>ITEMS:</h4> 
+        <table class="table table-bordered">
+            <tr>
+                <th scope="col">ITEM #</th>
+                <th scope="col">PURCHASE DATE</th>
+                <th scope="col">MANUFACTURER</th>
+                <th scope="col">STATUS</th>
+            </tr>
+            <tr ng-repeat="item in assetModel.items">
+                <td>{{item.item_no}}</td>
+                <td>{{item.purchase_date}}</td>
+                <td>{{item.manufacturer_name}}</td>
+                <td>{{item.status}}</td>
+            </tr>
+        </table>
     </div>
     <div class="panel-footer">
         <button type="submit" id="btBack" ng-click="showGridNow()">Back</button>

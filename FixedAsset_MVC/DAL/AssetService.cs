@@ -70,8 +70,8 @@ namespace FixedAsset_MVC.DAL
                 {
                     _asset.asset_id = Guid.NewGuid().ToString();
                 }
-                _asset.created_date = (_asset.created_date == null ? DateTime.SpecifyKind(DateTime.Now, DateTimeKind.Utc) : DateTime.SpecifyKind((DateTime)_asset.created_date, DateTimeKind.Utc));
-                _asset.last_modified_date = (_asset.last_modified_date == null ? DateTime.SpecifyKind(DateTime.Now, DateTimeKind.Utc) : DateTime.SpecifyKind((DateTime)_asset.last_modified_date, DateTimeKind.Utc));
+                _asset.created_date = DateTime.SpecifyKind(DateTime.Now, DateTimeKind.Utc);
+                _asset.last_modified_date = DateTime.SpecifyKind(DateTime.Now, DateTimeKind.Utc);
                 assets.InsertOne(_asset);
                 return _asset;
             }
@@ -107,7 +107,6 @@ namespace FixedAsset_MVC.DAL
                 return null;
             }
         }
-
         public string GetNextAssetNo()
         {
             string next_asset_no = string.Empty;
@@ -128,6 +127,62 @@ namespace FixedAsset_MVC.DAL
                 next_asset_no = string.Empty;
             }
             return next_asset_no;
+        }
+        public Asset_Item AddItem(Asset_Item item,string asset_id)
+        {
+            Asset_Item addedItem = null;
+            try
+            {
+                if (serverDown) return null;
+                if(string.IsNullOrEmpty(item.item_id))
+                {
+                    item.item_id = Guid.NewGuid().ToString();
+                }
+                item.created_date = DateTime.SpecifyKind(DateTime.Now, DateTimeKind.Utc);
+                item.last_modified_date = DateTime.SpecifyKind(DateTime.Now, DateTimeKind.Utc);
+
+                var filter = Builders<Asset>.Filter.Eq("asset_id", asset_id);
+                var update = Builders<Asset>.Update.Push("items", item);
+                var upsert = new UpdateOptions { IsUpsert = true };
+                assets.UpdateOne(filter, update, upsert);
+                addedItem= item;
+            }
+            catch (Exception)
+            {
+                addedItem = null;
+            }
+            return addedItem;
+        }
+        public Asset_Item UpdateItem(Asset_Item item,string asset_id)
+        {
+            Asset_Item updatedItem = null;
+            try
+            {
+                if (serverDown) return null;
+                item.last_modified_date = DateTime.SpecifyKind(DateTime.Now, DateTimeKind.Utc);
+                var filter = Builders<Asset>.Filter.Where(asset => asset.asset_id == asset_id && asset.items.Any(t => t.item_id == item.item_id));
+                var update = Builders<Asset>.Update.Set(asset => asset.items[-1], item);
+                assets.UpdateOneAsync(filter, update);
+            }
+            catch (Exception)
+            {
+                updatedItem = null;
+            }
+            return updatedItem;
+        }
+        public Asset_Item GetItem(string item_id)
+        {
+            Asset_Item item = null;
+            try
+            {
+                var itemData = assets.Find(Builders<Asset>.Filter.Eq("items.item_id", item_id)).Project(Builders<Asset>.Projection.Include("items.$").Exclude("_id")).ToList()[0].ElementAt(0).Value.AsBsonArray.ElementAt(0).AsBsonDocument;
+                item = MongoDB.Bson.Serialization.BsonSerializer.Deserialize<Asset_Item>(itemData);
+            }
+            catch (Exception)
+            {
+                item = null;
+            }
+            return item;
         }
     }
 }
