@@ -1,13 +1,23 @@
 ﻿<h2>Login</h2>
 
-<div id="content">
-    <div>{{message}}</div>
-    <hr />
-    <div>
-        <input type="text" ng-model="username" name="username" />
-        <input type="password"  ng-model="password" name="password" />
+<div id="content" class="panel panel-default" style="width:50%">
+    <div class="panel-heading">
+        LogIn 
     </div>
-    <div class="btn">
+    <div class="panel-body">
+        <div class="col-md-12">
+            <label for="username" >Username</label>
+            <input type="text" class="form-control" ng-model="username" name="username" />
+        </div>
+        <br />
+        <div class="col-md-12">
+            <label for="username">Password</label>
+            <input type="password" class="form-control" ng-model="password" name="password" />
+        </div>
+        <br />
+        <span >{{message}}</span>
+    </div>
+    <div class="panel-footer">
         <input type="submit" value="LogIn" ng-click="login()">
     </div>
 </div>

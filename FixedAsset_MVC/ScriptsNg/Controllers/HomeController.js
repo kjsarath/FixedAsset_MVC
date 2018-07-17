@@ -2,6 +2,11 @@
 homeApp.config(['$routeProvider', '$locationProvider', function ($routeProvider, $locationProvider) {
 
     $routeProvider
+        .when('/', {
+            controller: 'HomeController',
+            templateUrl: 'pages/Next.html',
+            hideMenus: true
+        })
         .when('/Next', {
             controller: 'HomeController',
             templateUrl: 'pages/Next.html',
@@ -12,11 +17,11 @@ homeApp.config(['$routeProvider', '$locationProvider', function ($routeProvider,
             templateUrl: 'pages/Company.html'
         })
         .when('/Asset', {
-            controller:'AssetController',
-            templateUrl:'pages/Asset.html'
-        })
+            controller: 'AssetController',
+            templateUrl: 'pages/Asset.html'
+        });
 
-        .otherwise({ redirectTo: '/Next' });
+        //.otherwise({ redirectTo: '/Next' });
 
 //    $locationProvider.html5Mode(true);
 }])

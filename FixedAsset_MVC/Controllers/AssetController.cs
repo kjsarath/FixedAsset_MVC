@@ -33,12 +33,12 @@ namespace FixedAsset_MVC.Controllers
         }
 
         [HttpGet]
-        public JsonResult GetAssetById(object _id)
+        public JsonResult GetAssetById(string asset_id)
         {
             Asset asset = null;
             try
             {
-                asset = assetService.GetAssetDetailsById(_id);
+                asset = assetService.GetAssetDetailsById(asset_id);
             }
             catch (Exception)
             {
@@ -58,6 +58,48 @@ namespace FixedAsset_MVC.Controllers
             {
             }
             return Json(assetAdded, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpPost]
+        public JsonResult UpdateAsset(Asset asset)
+        {
+            Asset assetUpdated = null;
+            try
+            {
+                assetUpdated = assetService.UpdateAsset(asset);
+            }
+            catch (Exception)
+            {
+            }
+            return Json(assetUpdated, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpGet]
+        public JsonResult GetNextAssetNo()
+        {
+            string asset_no = string.Empty;
+            try
+            {
+                asset_no = assetService.GetNextAssetNo();
+            }
+            catch (Exception)
+            {
+            }
+            return Json(asset_no, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpGet]
+        public JsonResult SearchAssets(string searchString)
+        {
+            List<Asset> filteredAssets = new List<Asset>();
+            try
+            {
+                filteredAssets = assetService.GetAll().Where(asset => asset.asset_no.IndexOf(searchString, StringComparison.OrdinalIgnoreCase) >= 0 || asset.description.IndexOf(searchString, StringComparison.OrdinalIgnoreCase) >= 0).ToList();
+            }
+            catch (Exception)
+            {
+            }
+            return Json(filteredAssets, JsonRequestBehavior.AllowGet);
         }
     }
 }

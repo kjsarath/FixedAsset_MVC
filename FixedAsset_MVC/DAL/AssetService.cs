@@ -20,7 +20,7 @@ namespace FixedAsset_MVC.DAL
             {
                 var mClient = new MongoClient(FixedAsset_MVC.Properties.Settings.Default.FixedAssetsConnectionString);
                 mDb = mClient.GetDatabase("FIXED_ASSET");
-                assets = mDb.GetCollection<Asset>("Asset");
+                assets = mDb.GetCollection<Asset>("asset");
 
             }
             catch(Exception)
@@ -49,11 +49,12 @@ namespace FixedAsset_MVC.DAL
                 return null;
             }
         }
-        public Asset GetAssetDetailsById(object _id)
+        public Asset GetAssetDetailsById(string asset_id)
         {
             try
             {
-                return assets.Find(Builders<Asset>.Filter.Eq("_id", _id)).FirstOrDefault();
+                var asset= assets.Find(Builders<Asset>.Filter.Eq("asset_id", asset_id)).FirstOrDefault();
+                return asset;
             }
             catch (Exception)
             {
@@ -65,6 +66,12 @@ namespace FixedAsset_MVC.DAL
             try
             {
                 if (serverDown) return null;
+                if(string.IsNullOrEmpty(_asset.asset_id))
+                {
+                    _asset.asset_id = Guid.NewGuid().ToString();
+                }
+                _asset.created_date = (_asset.created_date == null ? DateTime.SpecifyKind(DateTime.Now, DateTimeKind.Utc) : DateTime.SpecifyKind((DateTime)_asset.created_date, DateTimeKind.Utc));
+                _asset.last_modified_date = (_asset.last_modified_date == null ? DateTime.SpecifyKind(DateTime.Now, DateTimeKind.Utc) : DateTime.SpecifyKind((DateTime)_asset.last_modified_date, DateTimeKind.Utc));
                 assets.InsertOne(_asset);
                 return _asset;
             }
@@ -79,26 +86,48 @@ namespace FixedAsset_MVC.DAL
             {
                 if (serverDown) return null;
                 var updateBuilder = Builders<Asset>.Update
-                                    .Set("", _asset.asset_life)
-                                    .Set("", _asset.asset_no)
-                                    .Set("", _asset.category)
-                                    .Set("", _asset.created_by)
-                                    .Set("", _asset.created_date)
-                                    .Set("", _asset.depreciation_percent)
-                                    .Set("", _asset.depreciation_type)
-                                    .Set("", _asset.description)
-                                    .Set("", _asset.group)
-                                    .Set("", _asset.last_modified_by)
-                                    .Set("", _asset.last_modified_date)
-                                    .Set("", _asset.salvage_value)
-                                    .Set("", _asset.sub_category);
-                assets.UpdateOne(Builders<Asset>.Filter.Eq("_id", _asset._id), updateBuilder);
+                                    .Set("asset_life", _asset.asset_life)
+                                    .Set("asset_no", _asset.asset_no)
+                                    .Set("category", _asset.category)
+                                    .Set("created_by", _asset.created_by)
+                                    .Set("created_date", _asset.created_date)
+                                    .Set("depreciation_percent", _asset.depreciation_percent)
+                                    .Set("depreciation_type", _asset.depreciation_type)
+                                    .Set("description", _asset.description)
+                                    .Set("group", _asset.group)
+                                    .Set("last_modified_by", _asset.last_modified_by)
+                                    .Set("last_modified_date", DateTime.SpecifyKind(DateTime.Now, DateTimeKind.Utc) )
+                                    .Set("salvage_value", _asset.salvage_value)
+                                    .Set("sub_category", _asset.sub_category);
+                assets.UpdateOne(Builders<Asset>.Filter.Eq("asset_id", _asset.asset_id), updateBuilder);
                 return _asset;
             }
             catch (Exception)
             {
                 return null;
             }
+        }
+
+        public string GetNextAssetNo()
+        {
+            string next_asset_no = string.Empty;
+            try
+            {
+                var x = GetAll().Select(asset => new { a_no = Convert.ToInt32(asset.asset_no) }).OrderByDescending(a=>a.a_no).ToList();
+                if(x==null ||x.Count<=0)
+                {
+                    next_asset_no = string.Empty;
+                }
+                else
+                {
+                    next_asset_no = (x[0].a_no + 1).ToString();
+                }
+            }
+            catch (Exception)
+            {
+                next_asset_no = string.Empty;
+            }
+            return next_asset_no;
         }
     }
 }

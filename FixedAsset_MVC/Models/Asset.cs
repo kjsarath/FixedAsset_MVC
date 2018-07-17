@@ -12,6 +12,8 @@ namespace FixedAsset_MVC.Models
         [BsonId]
         public MongoDB.Bson.ObjectId _id { get; set; }
 
+        public string asset_id { get; set; }
+
         [Required(ErrorMessage ="Cannot keep an asset without a number")]
         public string asset_no { get; set; }
 
@@ -40,9 +42,9 @@ namespace FixedAsset_MVC.Models
         [BsonDefaultValue(0)]
         public decimal salvage_value { get; set; }
 
-        public MongoDB.Bson.ObjectId created_by { get; set; }
+        public string created_by { get; set; }
         public DateTime created_date { get; set; }
-        public MongoDB.Bson.ObjectId last_modified_by { get; set; }
+        public string last_modified_by { get; set; }
         public DateTime  last_modified_date{ get; set; }
 
     }

@@ -1,5 +1,8 @@
 ﻿<h1>Assets</h1>
-<div ng-hide="showDetails">
+<div ng-show="showGrid">
+    <button id="btAdd" ng-click="showEditNow()">New Asset</button>
+    <br /><br />
+    <input type="text" class="form-control col-md-12" style="width:100%" id="txtSearch" placeholder="Type here to search with asset no. or description" ng-model="searchText"  ng-change="searchAsset()"/>
     <table class="table table-striped">
         <tr>
             <th scope="col">ASSET #</th>
@@ -15,21 +18,76 @@
             <td>{{assetModel.category}}</td>
             <td>{{assetModel.depreciation_type}}</td>
             <td>
-                <button type="submit" id="btDetails" ng-click="get"
+                <button type="submit" id="btDetails" ng-click="getAssetDetails(assetModel)">Detail</button>
+                <button id="btEdit" ng-click="getAssetForEdit(assetModel)">Edit</button>
             </td>
         </tr>
     </table>
 </div>
-<div ng-show="showDetails">
-    <h4>ASSET #: {{assetModel.asset_no}}</h4>
-    <h4>NAME/DESCRIPTION: {{assetModel.description}}</h4>
-    <h4>GROUP: {{assetModel.group}}</h4>
-    <h4>CATEGORY: {{assetModel.category}}</h4>
-    <h4>SUB CATEGORY: {{assetModel.sub_category}}</h4>
-    <h4>ASSET LIFE: {{assetModel.asset_life}}</h4>
-    <h4>DEPRICIATION TYPE: {{assetModel.depreciation_type}}</h4>
-    <h4>DEPRECIATION %:{{assetModel.depreciation_percent}}</h4>
-    <h4>SALVAGE VALUE: {{assetModel.salvage_value}}</h4>
-    <br />
-    <button type="submit" id="btBack" ng-click="showGrid()">Back</button>
+<div ng-show="showDetails" class="panel panel-default">
+    <div class="panel-heading">
+        Details of selected Asset
+    </div>
+    <div class="panel-body">
+        <h4>ASSET #: {{assetModel.asset_no}}</h4>
+        <h4>NAME/DESCRIPTION: {{assetModel.description}}</h4>
+        <h4>GROUP: {{assetModel.group}}</h4>
+        <h4>CATEGORY: {{assetModel.category}}</h4>
+        <h4>SUB CATEGORY: {{assetModel.sub_category}}</h4>
+        <h4>ASSET LIFE: {{assetModel.asset_life}}</h4>
+        <h4>DEPRICIATION TYPE: {{assetModel.depreciation_type}}</h4>
+        <h4>DEPRECIATION %:{{assetModel.depreciation_percent}}</h4>
+        <h4>SALVAGE VALUE: {{assetModel.salvage_value}}</h4>
+    </div>
+    <div class="panel-footer">
+        <button type="submit" id="btBack" ng-click="showGridNow()">Back</button>
+    </div>
+</div>
+<div ng-show="showEdit" class="panel panel-default " >
+    <div class="panel-heading">
+        Details of selected Asset
+    </div>
+    <div class="panel-body">
+        <div>
+            <label for="asset_no">ASSET #</label>
+            <input type="text" class="form-control" name="asset_no" ng-model="assetModel.asset_no" />
+        </div>
+        <div>
+            <label for="description">NAME/DESCRIPTION</label>
+            <input type="text" class="form-control" name="description" ng-model="assetModel.description" />
+        </div>
+        <div>
+            <label for="asset_no">GROUP</label>
+            <input type="text" class="form-control" name="asset_no" ng-model="assetModel.group" />
+        </div>
+        <div>
+            <label for="category">CATEGORY</label>
+            <input type="text" class="form-control" name="category" ng-model="assetModel.category" />
+        </div>
+        <div>
+            <label for="sub_category">SUB CATEGORY</label>
+            <input type="text" class="form-control" name="sub_category" ng-model="assetModel.sub_category" />
+        </div>
+        <div>
+            <label for="asset_life">ASSET LIFE</label>
+            <input type="text" class="form-control" name="asset_life" ng-model="assetModel.asset_life" />
+        </div>
+        <div>
+            <label for="depreciation_type">DEPRICIATION TYPE</label>
+            <input type="text" class="form-control" name="depreciation_type" ng-model="assetModel.depreciation_type" />
+        </div>
+        <div>
+            <label for="depreciation_percent">DEPRECIATION %</label>
+            <input type="text" class="form-control" name="depreciation_percent" ng-model="assetModel.depreciation_percent" />
+        </div>
+        <div>
+            <label for="salvage_value">SALVAGE VALUE</label>
+            <input type="text" class="form-control" name="salvage_value" ng-model="assetModel.salvage_value" />
+        </div>
+
+    </div>
+    <div class="panel-footer">
+        <button type="submit" id="btSave" ng-click="actOnData(assetModel)">Save</button>
+        <button type="submit" id="btBack" ng-click="showGridNow()">Back</button>
+    </div>
 </div>
