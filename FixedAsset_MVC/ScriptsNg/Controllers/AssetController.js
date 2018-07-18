@@ -33,6 +33,7 @@
 
         function getAll() {
             //debugger;
+            $scope.allAssets = {};
             $http.get('Asset/GetAll')
                 .then(function (data) {
                     if(data==undefined || data.data=="" ){

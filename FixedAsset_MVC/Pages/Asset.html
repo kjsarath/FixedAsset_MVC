@@ -11,7 +11,7 @@
             <th scope="col">CATEGORY</th>
             <th scope="col">DEPR. TYPE</th>
         </tr>
-        <tr ng-repeat="assetModel in allAssets">
+        <tr ng-repeat="assetModel in allAssets track by $index">
             <td>{{assetModel.asset_no}}</td>
             <td>{{assetModel.description}}</td>
             <td>{{assetModel.group}}</td>

@@ -19,11 +19,10 @@ homeApp.config(['$routeProvider', '$locationProvider', function ($routeProvider,
         .when('/Asset', {
             controller: 'AssetController',
             templateUrl: 'pages/Asset.html'
-        });
+        })
+        .otherwise({ redirectTo: '/Next' });
 
-        //.otherwise({ redirectTo: '/Next' });
-
-//    $locationProvider.html5Mode(true);
+    //$locationProvider.html5Mode(true);
 }])
 
 homeApp.run(['$rootScope', '$location', '$cookieStore', '$http',

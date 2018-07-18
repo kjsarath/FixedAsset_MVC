@@ -1,6 +1,6 @@
 ﻿angular.module('Home', ['ngRoute', 'ngCookies']);
 angular.module('faAppLogIn', ['ngRoute','ngCookies'])
-.config(['$routeProvider', function ($routeProvider) {
+.config(['$routeProvider', '$locationProvider', function ($routeProvider, $locationProvider) {
 
     $routeProvider
         .when('/login', {
